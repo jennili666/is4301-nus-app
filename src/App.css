@@ -226,3 +226,38 @@ body {
     font-size: 1.35rem;
   }
 }
+
+/* ---------- Login menu in navigation panel ---------- */
+.navbar__divider {
+  width: 1px;
+  height: 24px;
+  margin: 0 6px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.navbar__user {
+  color: #fff;
+  font-size: 0.9rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navbar__button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navbar__lock {
+  margin-left: 6px;
+  font-size: 0.8rem;
+}
+
+.loading {
+  text-align: center;
+  color: var(--muted);
+}
