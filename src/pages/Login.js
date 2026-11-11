@@ -22,6 +22,12 @@ function Login() {
   useEffect(() => () => (mounted.current = false), []);
 
   useEffect(() => {
+    if (blockedPage) {
+      notify("info", "Login required", `The ${blockedPage} page is only available to logged-in users.`);
+    }
+  }, [blockedPage, notify]);
+
+  useEffect(() => {
     if (!loading && user) navigate(redirectTo, { replace: true });
   }, [user, loading, navigate, redirectTo]);
 

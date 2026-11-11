@@ -6,8 +6,8 @@ import { useNotify } from "./Notification";
 
 const links = [
   { to: "/", label: "Home", end: true },
-  { to: "/academics", label: "Academics" },
-  { to: "/admission", label: "Admission" },
+  { to: "/academics", label: "Academics", protected: true },
+  { to: "/admission", label: "Admission", protected: true },
 ];
 
 const linkClass = ({ isActive }) => "navbar__link" + (isActive ? " navbar__link--active" : "");
@@ -32,6 +32,11 @@ function NavBar() {
         {links.map((link) => (
           <NavLink key={link.to} to={link.to} end={link.end} className={linkClass}>
             {link.label}
+            {link.protected && !user && (
+              <span className="navbar__lock" title="Login required" aria-label="login required">
+                🔒
+              </span>
+            )}
           </NavLink>
         ))}
         <span className="navbar__divider" aria-hidden="true" />
