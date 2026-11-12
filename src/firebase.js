@@ -16,11 +16,9 @@ import {
   collection,
   getDocs,
   getFirestore,
-  limit,
   query,
   where,
 } from "firebase/firestore";
-import { isAmbiguousCredentialError } from "./authErrors";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY || publicFirebaseConfig.apiKey,
@@ -40,44 +38,9 @@ export const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
 
-const authError = (code) => {
-  const error = new Error(code);
-  error.code = code;
-  return error;
-};
-
-// Look up the profile saved in Firestore when the account was created.
-// Returns null if no account uses this email.
-const findUserProfile = async (email) => {
-  const typed = email.trim();
-  const emails = Array.from(new Set([typed, typed.toLowerCase()]));
-  const q = query(collection(db, "users"), where("email", "in", emails), limit(1));
-  const snapshot = await getDocs(q);
-  return snapshot.empty ? null : snapshot.docs[0].data();
-};
-
 export const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    const result = await signInWithEmailAndPassword(auth, email.trim(), password);
-    return result.user;
-  } catch (err) {
-    // With email-enumeration protection, Firebase returns one generic error for
-    // both "wrong password" and "no such user". Use the saved profiles to tell
-    // the user which case applies.
-    if (isAmbiguousCredentialError(err)) {
-      let profile;
-      try {
-        profile = await findUserProfile(email);
-      } catch (lookupError) {
-        console.error(lookupError);
-        throw err;
-      }
-      if (profile === null) throw authError("auth/user-not-found");
-      if (profile.authProvider === "google") throw authError("app/google-account");
-      throw authError("auth/wrong-password");
-    }
-    throw err;
-  }
+  const result = await signInWithEmailAndPassword(auth, email.trim(), password);
+  return result.user;
 };
 
 export const signInWithGoogle = async () => {

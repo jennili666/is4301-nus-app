@@ -1,14 +1,12 @@
 const WRONG_CREDENTIALS =
-  "Wrong credentials: the email or password is incorrect, or no account exists for this email.";
+  "The email or password is incorrect, or no account exists. Check your details, sign up, or use Sign in with Google.";
 
 const messages = {
   "auth/invalid-email": () =>
     "The email address is not valid. Please use the format name@example.com.",
   "auth/missing-password": () => "Please enter your password.",
-  "auth/user-not-found": (email) =>
-    `No account exists for ${email}. Check the email address, or sign up for a new account.`,
-  "auth/wrong-password": (email) =>
-    `Wrong password for ${email}. The account exists but the password is incorrect. Please try again.`,
+  "auth/user-not-found": () => WRONG_CREDENTIALS,
+  "auth/wrong-password": () => WRONG_CREDENTIALS,
   "app/google-account": (email) =>
     `${email} is registered with Google. Please use "Sign in with Google" instead.`,
   "auth/invalid-credential": () => WRONG_CREDENTIALS,

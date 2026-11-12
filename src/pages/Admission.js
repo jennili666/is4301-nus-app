@@ -11,13 +11,13 @@ function Admission() {
     <section className="card">
       <h1>Admission</h1>
       <p className="lead">Admission process flow</p>
-      <ol className="admission-flow">
+      <ul className="admission-bullets">
         {admissionSteps.map((step) => (
           <li key={step}>
-            <span className="admission-flow__text">{step}</span>
+            <span className="admission-bullets__text">{step}</span>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }
