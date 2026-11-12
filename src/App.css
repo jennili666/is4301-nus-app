@@ -261,3 +261,6 @@ body {
   text-align: center;
   color: var(--muted);
 }
+
+.admission-bullets { list-style: disc; padding-left: 1.5rem; }
+.admission-bullets li { display: list-item; margin: .75rem 0; }
