@@ -6,7 +6,8 @@ A React single-page app with:
 - **Academics** – table of modules taught at the university
 - **Admission** – admission process flow
 - **Login / Sign up** – Firebase Authentication with email/password or Google account,
-  with clear notifications for wrong credentials, non-existent users and other errors
+  with a shared credential-error notification for wrong passwords and absent accounts,
+  preserving account privacy; other errors have actionable messages
 - Academics and Admission are only accessible after logging in
 
 ## Run locally
